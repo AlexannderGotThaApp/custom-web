@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customizable Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #palette, #button-maker {
+            margin: 20px 0;
+        }
+        .button-preview {
+            margin-top: 10px;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customizable Website</h1>
+
+    <!-- RGB Palette -->
+    <div id="palette">
+        <h2>Background Color</h2>
+        <input type="color" id="bgColorPicker" value="#ffffff">
+        <button onclick="changeBackgroundColor()">Apply</button>
+    </div>
+
+    <!-- Title Chooser -->
+    <div id="title-chooser">
+        <h2>Set Website Title</h2>
+        <input type="text" id="titleInput" placeholder="Type new title here">
+    </div>
+
+    <!-- Button Maker -->
+    <div id="button-maker">
+        <h2>Create a Button</h2>
+        <label for="btnText">Button Text:</label>
+        <input type="text" id="btnText" placeholder="Enter text">
+        <br><br>
+        <label for="btnColor">Button Color:</label>
+        <input type="color" id="btnColor" value="#0000ff">
+        <br><br>
+        <label for="btnSize">Button Size (px):</label>
+        <input type="number" id="btnSize" placeholder="Font size" min="10" max="100" value="16">
+        <br><br>
+        <button onclick="createButton()">Create Button</button>
+        <div id="buttonPreview" class="button-preview"></div>
+    </div>
+
+    <script>
+        // Change Background Color
+        function changeBackgroundColor() {
+            const color = document.getElementById('bgColorPicker').value;
+            document.body.style.backgroundColor = color;
+        }
+
+        // Set Website Title
+        document.getElementById('titleInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const title = this.value;
+                document.title = title;
+                this.value = '';
+                this.placeholder = "Title updated!";
+            }
+        });
+
+        // Create Button
+        function createButton() {
+            const text = document.getElementById('btnText').value || "New Button";
+            const color = document.getElementById('btnColor').value;
+            const size = document.getElementById('btnSize').value || 16;
+
+            const button = document.createElement('button');
+            button.textContent = text;
+            button.style.backgroundColor = color;
+            button.style.fontSize = `${size}px`;
+            button.style.color = "#fff";
+            button.style.border = "none";
+            button.style.padding = "10px 20px";
+            button.style.margin = "5px";
+            
+            document.getElementById('buttonPreview').appendChild(button);
+        }
+    </script>
+</body>
+</html>
