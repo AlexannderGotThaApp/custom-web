@@ -1,1 +1,25 @@
-You clicked the button you made, congratulations!!!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Clicked the Button</title>
+    <script>
+        // Function to get query parameters
+        function getQueryParam(param) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(param);
+        }
+
+        // Set the background color on page load
+        window.onload = function() {
+            const bgColor = getQueryParam('bgColor') || '#ffffff'; // Default to white
+            document.body.style.backgroundColor = bgColor;
+        };
+    </script>
+</head>
+<body>
+    <h1>You clicked the button you made! Congratulations man!!!!</h1>
+    <p>Thanks for using my test.</p>
+</body>
+</html>
