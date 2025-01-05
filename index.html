@@ -10,81 +10,82 @@
             text-align: center;
             margin: 20px;
         }
-        #palette, #button-maker {
-            margin: 20px 0;
+        .section {
+            margin-bottom: 20px;
         }
-        .button-preview {
+        .button-preview button {
             margin-top: 10px;
         }
-        button {
-            cursor: pointer;
+        input[type="color"],
+        input[type="text"],
+        input[type="number"] {
+            margin: 10px;
         }
     </style>
 </head>
 <body>
     <h1>Customizable Website</h1>
 
-    <!-- RGB Palette -->
-    <div id="palette">
-        <h2>Background Color</h2>
+    <!-- RGB Palette Section -->
+    <div class="section">
+        <h2>Choose Background Color</h2>
         <input type="color" id="bgColorPicker" value="#ffffff">
-        <button onclick="changeBackgroundColor()">Apply</button>
+        <button onclick="changeBackground()">Apply</button>
     </div>
 
-    <!-- Title Chooser -->
-    <div id="title-chooser">
+    <!-- Title Chooser Section -->
+    <div class="section">
         <h2>Set Website Title</h2>
-        <input type="text" id="titleInput" placeholder="Type new title here">
+        <input type="text" id="titleInput" placeholder="Enter title here" onkeypress="setTitle(event)">
     </div>
 
-    <!-- Button Maker -->
-    <div id="button-maker">
-        <h2>Create a Button</h2>
-        <label for="btnText">Button Text:</label>
-        <input type="text" id="btnText" placeholder="Enter text">
-        <br><br>
-        <label for="btnColor">Button Color:</label>
-        <input type="color" id="btnColor" value="#0000ff">
-        <br><br>
-        <label for="btnSize">Button Size (px):</label>
-        <input type="number" id="btnSize" placeholder="Font size" min="10" max="100" value="16">
-        <br><br>
-        <button onclick="createButton()">Create Button</button>
+    <!-- Button Maker Section -->
+    <div class="section">
+        <h2>Create a Custom Button</h2>
+        <input type="text" id="btnText" placeholder="Button text">
+        <input type="color" id="btnColor" value="#007bff">
+        <input type="number" id="btnSize" placeholder="Font size (px)" min="10" max="100" value="16">
+        <button onclick="createRedirectButton()">Create Button</button>
         <div id="buttonPreview" class="button-preview"></div>
     </div>
 
     <script>
-        // Change Background Color
-        function changeBackgroundColor() {
+        // Function to change the background color
+        function changeBackground() {
             const color = document.getElementById('bgColorPicker').value;
             document.body.style.backgroundColor = color;
         }
 
-        // Set Website Title
-        document.getElementById('titleInput').addEventListener('keypress', function(event) {
+        // Function to set the title of the website
+        function setTitle(event) {
             if (event.key === 'Enter') {
-                const title = this.value;
+                const title = document.getElementById('titleInput').value;
                 document.title = title;
-                this.value = '';
-                this.placeholder = "Title updated!";
+                document.getElementById('titleInput').style.display = 'none';
             }
-        });
+        }
 
-        // Create Button
-        function createButton() {
-            const text = document.getElementById('btnText').value || "New Button";
+        // Function to create a redirect button
+        function createRedirectButton() {
+            const text = document.getElementById('btnText').value || "Click Me!";
             const color = document.getElementById('btnColor').value;
             const size = document.getElementById('btnSize').value || 16;
 
             const button = document.createElement('button');
             button.textContent = text;
             button.style.backgroundColor = color;
+            button.style.color = '#fff';
             button.style.fontSize = `${size}px`;
-            button.style.color = "#fff";
-            button.style.border = "none";
-            button.style.padding = "10px 20px";
-            button.style.margin = "5px";
-            
+            button.style.border = 'none';
+            button.style.padding = '10px 20px';
+            button.style.margin = '5px';
+            button.style.cursor = 'pointer';
+
+            // Redirect functionality
+            button.onclick = function() {
+                window.location.href = "https://alexanndergotthaapp.github.io/custom-web/YouClickedTheButton";
+            };
+
             document.getElementById('buttonPreview').appendChild(button);
         }
     </script>
