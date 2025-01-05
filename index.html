@@ -50,10 +50,12 @@
     </div>
 
     <script>
+        let bgColor = "#ffffff"; // Default background color
+
         // Function to change the background color
         function changeBackground() {
-            const color = document.getElementById('bgColorPicker').value;
-            document.body.style.backgroundColor = color;
+            bgColor = document.getElementById('bgColorPicker').value;
+            document.body.style.backgroundColor = bgColor;
         }
 
         // Function to set the title of the website
@@ -81,9 +83,9 @@
             button.style.margin = '5px';
             button.style.cursor = 'pointer';
 
-            // Redirect functionality
+            // Redirect functionality with background color as a query parameter
             button.onclick = function() {
-                window.location.href = "https://alexanndergotthaapp.github.io/custom-web/YouClickedTheButton";
+                window.location.href = `https://alexanndergotthaapp.github.io/custom-web/YouClickedTheButton?bgColor=${encodeURIComponent(bgColor)}`;
             };
 
             document.getElementById('buttonPreview').appendChild(button);
